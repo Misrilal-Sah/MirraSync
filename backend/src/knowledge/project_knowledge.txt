@@ -1,0 +1,126 @@
+# MirraSync — Project Knowledge Base
+# This file is used by the RAG chatbot to answer user questions about MirraSync.
+
+## What is MirraSync?
+MirraSync is a web application that lets users interact with multiple AI models simultaneously. You type one prompt and get responses from several AI models side by side, so you can compare which AI gives the best answer.
+
+## Core Features
+- **Parallel AI Sync**: Send one prompt to up to 10 AI models at once and compare answers side-by-side in real time.
+- **32+ AI Models**: Access 24 free models and 8+ Pro models from 12 providers including OpenAI, Google, Groq, Meta, Cerebras, Cohere, Mistral, and OpenRouter.
+- **Bring Your Own API Keys**: Users can add their own API keys (e.g., Groq, Google AI Studio) for higher rate limits. Keys are AES-256 encrypted.
+- **Vision & File Uploads**: Attach images, PDFs, and documents. Vision-enabled models will analyze them.
+- **Voice Input**: Speak your prompts with real-time transcription. No setup needed.
+- **Prompt Cleaner**: AI rewrites your prompt for clarity before sending. You can see the diff.
+- **Chat History**: Logged-in users can save, search, and manage their full conversation history.
+- **Dark/Light Theme**: Toggle between dark and light mode. Homepage is always dark.
+- **Multi-Language Support**: AI models can respond in your chosen language (English, Spanish, French, German, Hindi, Japanese, Chinese).
+
+## User Tiers
+
+### Guest (No Login Required)
+- Unlimited messages (rate limited: 10 requests/minute, 100/hour)
+- 10 models available out of 24
+- Maximum 3 active models at once
+- No chat history saved
+- No file uploads
+- No API key management
+- 3 lightweight default models auto-selected
+
+### Free Account ($0/month)
+- Unlimited messages (rate limited: 20 requests/minute, 500/hour)
+- All 24 free models available
+- Maximum 10 active models at once
+- Full chat history saved
+- File & image uploads
+- Voice input
+- Prompt cleaner
+- Custom API keys
+- AI preferences (default models, language, context settings)
+
+### Pro (Coming Soon)
+- Unlimited messages with highest rate limits
+- 32+ models including GPT-4o, Claude 4 Sonnet, Gemini 2.5 Pro, Llama 4 Maverick
+- Maximum 20 active models at once
+- Priority support
+- Team features
+- Early access to new models
+
+## Unlocking Pro Models
+Users can unlock Pro models by adding their own valid API key for the corresponding provider. For example, if you add your OpenAI API key and it passes validation, GPT-4o becomes available to you without needing a Pro subscription.
+
+## Available Free Models (24 total)
+1. GPT-5 (GitHub Models)
+2. Gemini 2.5 Flash (Google AI)
+3. Kimi K2 (Groq)
+4. DeepSeek R1 (GitHub Models)
+5. Grok 3 (GitHub Models)
+6. Llama 4 Scout (Groq)
+7. Command A Reasoning (Cohere)
+8. Mistral Large (Mistral)
+9. Qwen3 Coder (OpenRouter)
+10. GPT-OSS 120B (Cerebras)
+11. Gemini 3.1 Flash Lite (Google AI)
+12. Llama 3.1 8B (Cerebras)
+13. Qwen3 32B (Groq)
+14. And more...
+
+## Pro Models (8+)
+1. GPT-4o (OpenAI) — advanced multi-modal model
+2. Claude 4 Sonnet (Anthropic) — strong reasoning
+3. Gemini 2.5 Pro (Google) — extended context
+4. Llama 4 Maverick (Meta) — large scale open model
+5. And more coming...
+
+## Technology Stack
+- **Frontend**: React.js with Framer Motion animations
+- **Backend**: Node.js + Express
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: JWT + Google OAuth
+- **Email**: SMTP via Nodemailer (email verification, password reset)
+- **AI Providers**: 12 provider APIs accessed via streaming (SSE)
+- **Encryption**: AES-256 for API keys
+
+## Settings
+Users can configure:
+- **General**: Theme (dark/light), Language preferences
+- **AI Preferences**: Default active models (max 4), Context window size, Enable/disable conversation history context
+- **API Keys**: Save/test API keys per provider (Groq, Google AI, GitHub Models, Cerebras, Cohere, Mistral, OpenRouter, Cloudflare)
+- **Profile**: Display name, email, password change, account deletion
+- **Subscription**: View current plan, see Pro features
+
+## Authentication
+- Email/password signup with email verification
+- Google OAuth sign-in
+- Password reset via email
+- JWT token-based sessions
+
+## Privacy & Security
+- API keys are AES-256 encrypted at rest
+- Conversations are private to each user
+- No conversation data is shared or logged externally
+- Users can delete their account and all data at any time
+- Rate limiting prevents abuse
+
+## Contact
+- Email: support@mirrasync.com
+- Response time: Within 24 hours
+- Availability: Worldwide, 24/7
+
+## FAQ
+Q: How is MirraSync different from using each AI separately?
+A: MirraSync sends one prompt to multiple AI models at once and shows responses side-by-side. No need to switch between tabs.
+
+Q: Do I need API keys?
+A: No! All 24 base models work without any API keys. Optionally bring your own keys for higher rate limits or to unlock Pro models.
+
+Q: Is my data private?
+A: Yes. API keys are AES-256 encrypted. We never log or share conversations. Delete data anytime.
+
+Q: Can I use MirraSync without signing up?
+A: Yes! Guest mode gives you access to 10 models with up to 3 active simultaneously. No login required.
+
+Q: What happens when I reach the rate limit?
+A: You'll see a friendly message asking you to wait a moment. Signing up increases your rate limit. Rate limits reset every minute.
+
+Q: How do I unlock Pro models?
+A: Either subscribe to Pro (coming soon) or add your own API key for the provider. If the key passes validation, Pro models from that provider become available.

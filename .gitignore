@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment variables — NEVER commit these
+.env
+.env.local
+.env.production
+.env.development
+backend/.env
+backend/.env.local
+backend/.env.production
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+frontend/.env.development
+*.env.local
+
+# Build outputs
+frontend/build/
+backend/dist/
+
+# Prisma
+backend/prisma/migrations/
+
+# Logs
+*.log
+npm-debug.log*
+*_logs.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Coverage
+coverage/
+
+# Misc
+.cache/
+
+# Database dumps — NEVER commit these
+*.sql
+*.dump
+*.db
+
+# SSL Certificates
+ca.pem
+*.pem
+*.cert
+*.key

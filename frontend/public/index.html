@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="description" content="MirraSync — Run 24 AI models simultaneously on one prompt. Compare GPT-5, Gemini, Grok, DeepSeek and more side by side." />
+    <meta property="og:title" content="MirraSync — Sync Every Mind. One Prompt." />
+    <meta property="og:description" content="Run 24 AI models simultaneously. Compare answers side by side. 100% free." />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Identity Services for OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <title>MirraSync — Sync Every Mind. One Prompt.</title>
+    <link rel="icon" href="https://res.cloudinary.com/ddrlxvnsh/image/upload/v1774035263/logo_k2bhoz_k21hch.png" />
+
+    <style>
+      /* Prevent flash of unstyled content */
+      html { background: #0a0a0f; }
+      html[data-theme="light"] { background: #f0f0f8; }
+
+      /* Loading screen */
+      #root:empty::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 40px;
+        border: 3px solid #2a2a3a;
+        border-top-color: #00d4aa;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run MirraSync.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
