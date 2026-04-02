@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import api from '../../lib/api';
@@ -122,16 +122,16 @@ export default function PromptInput({ onSend, disabled, modelCount, isGuest }) {
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-                <button onClick={() => setCleanModal(null)} style={{ padding: '8px 18px', background: 'none', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-secondary)', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>Keep Original</button>
+                <button onClick={() => setCleanModal(null)} style={{ padding: '8px 18px', background: 'none', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-secondary)', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>Keep Original</button>
                 <button onClick={() => { setText(cleanModal.cleaned); setCleanModal(null); toast.success('Prompt refined ✦'); }}
-                  style={{ padding: '8px 18px', background: 'var(--accent-gradient)', border: 'none', borderRadius: 'var(--radius-md)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>Apply ✦</button>
+                  style={{ padding: '8px 18px', background: 'var(--accent-gradient)', border: 'none', borderRadius: 'var(--radius-md)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>Apply ✦</button>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div style={{ flexShrink: 0, padding: '10px 12px 14px', borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-surface)' }}>
+      <div style={{ flexShrink: 0, padding: '10px 14px 14px', borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-surface)' }}>
         {isGuest && (
           <div style={{ marginBottom: 8, padding: '6px 12px', background: 'var(--warning-dim)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 12 }}>
             <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>👋 Guest Mode · <a href="/signup" style={{ color: 'var(--accent-teal)', textDecoration: 'none', fontWeight: 600 }}>Sign up</a> for more models & features</span>
@@ -158,9 +158,9 @@ export default function PromptInput({ onSend, disabled, modelCount, isGuest }) {
         </AnimatePresence>
 
         <div
-          style={{ display: 'flex', alignItems: 'flex-end', gap: 4, background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-lg)', padding: '6px 6px 6px 8px', transition: 'border-color var(--transition-fast)' }}
-          onFocusCapture={e => e.currentTarget.style.borderColor = 'var(--accent-teal)'}
-          onBlurCapture={e => e.currentTarget.style.borderColor = 'var(--border-default)'}
+          style={{ display: 'flex', alignItems: 'flex-end', gap: 4, background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-xl)', padding: '6px 6px 6px 10px', transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)' }}
+          onFocusCapture={e => { e.currentTarget.style.borderColor = 'var(--accent-teal)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,229,200,0.08)'; }}
+          onBlurCapture={e => { e.currentTarget.style.borderColor = 'var(--border-default)'; e.currentTarget.style.boxShadow = 'none'; }}
         >
           <IBtn onClick={() => fileInputRef.current?.click()} title={isGuest ? 'Sign in to attach files' : 'Attach files'} loading={uploading} disabled={isGuest || uploading}>
             <Paperclip size={15} />
@@ -175,7 +175,7 @@ export default function PromptInput({ onSend, disabled, modelCount, isGuest }) {
             placeholder="Ask all your AIs anything..."
             disabled={disabled}
             rows={1}
-            style={{ flex: 1, background: 'none', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: 14, fontFamily: 'Space Grotesk, sans-serif', lineHeight: 1.6, resize: 'none', padding: '4px 4px', minHeight: 28, maxHeight: 160, overflowY: 'hidden', scrollbarWidth: 'thin', scrollbarColor: 'var(--border-default) transparent', cursor: disabled ? 'not-allowed' : 'text', opacity: disabled ? 0.6 : 1 }}
+            style={{ flex: 1, background: 'none', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: 14, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", lineHeight: 1.6, resize: 'none', padding: '4px 4px', minHeight: 28, maxHeight: 160, overflowY: 'hidden', scrollbarWidth: 'thin', scrollbarColor: 'var(--border-default) transparent', cursor: disabled ? 'not-allowed' : 'text', opacity: disabled ? 0.6 : 1 }}
           />
 
           <div style={{ display: 'flex', gap: 2, alignItems: 'center', flexShrink: 0 }}>
@@ -192,7 +192,7 @@ export default function PromptInput({ onSend, disabled, modelCount, isGuest }) {
               onClick={handleSend} disabled={!canSend}
               whileHover={{ scale: canSend ? 1.05 : 1 }} whileTap={{ scale: canSend ? 0.94 : 1 }}
               title="Send (Enter)"
-              style={{ width: 34, height: 34, background: canSend ? 'var(--accent-gradient)' : 'var(--bg-overlay)', border: 'none', borderRadius: 'var(--radius-md)', color: canSend ? '#fff' : 'var(--text-muted)', cursor: canSend ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: canSend ? '0 2px 10px rgba(0,212,170,0.2)' : 'none', transition: 'all var(--transition-fast)' }}>
+              style={{ width: 34, height: 34, background: canSend ? 'var(--aurora-gradient)' : 'var(--bg-overlay)', border: 'none', borderRadius: 'var(--radius-md)', color: canSend ? '#fff' : 'var(--text-muted)', cursor: canSend ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: canSend ? '0 2px 12px rgba(0,229,200,0.22)' : 'none', transition: 'all var(--transition-fast)' }}>
               {disabled
                 ? <div style={{ width: 13, height: 13, border: '2px solid transparent', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />
                 : <Send size={14} />

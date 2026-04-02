@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+﻿import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
@@ -154,7 +154,7 @@ export default function LogsPage() {
                   width: '100%', padding: '9px 12px 9px 36px', 
                   background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', 
                   borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', 
-                  fontSize: 13, fontFamily: 'Space Grotesk, sans-serif', outline: 'none',
+                  fontSize: 13, fontFamily: 'Plus Jakarta Sans, sans-serif', outline: 'none',
                   transition: 'border-color 0.2s',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
                 }} 

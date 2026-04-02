@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import useAuthStore from '../../stores/authStore';
@@ -50,7 +50,7 @@ export default function SettingsModal({ onClose }) {
         transition={{ type: 'spring', stiffness: 320, damping: 30 }}
         onClick={e => e.stopPropagation()}
         className="settings-modal-container settings-modal-inner"
-        style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-xl)', width: '100%', maxWidth: 820, height: '85vh', maxHeight: 680, display: 'flex', overflow: 'hidden', boxShadow: 'var(--shadow-lg), var(--shadow-glow-teal)' }}
+        style={{         background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-xl)', width: '100%', maxWidth: 820, height: '85vh', maxHeight: 680, display: 'flex', overflow: 'hidden', boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,229,200,0.05)', position: 'relative', }}
       >
         <div className="settings-header-mobile" style={{ display: 'none', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid var(--border-subtle)', background: 'var(--bg-surface)', flexShrink: 0 }}>
           <h3 style={{ fontSize: 16, fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Settings</h3>
@@ -65,7 +65,7 @@ export default function SettingsModal({ onClose }) {
           </div>
           {visibleTabs.map(tab => (
             <button key={tab.id} onClick={() => setSettingsTab(tab.id)}
-              style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', borderRadius: 'var(--radius-md)', background: settingsTab === tab.id ? 'var(--bg-hover)' : 'none', border: 'none', color: settingsTab === tab.id ? 'var(--text-primary)' : 'var(--text-secondary)', fontSize: 13, fontWeight: settingsTab === tab.id ? 700 : 500, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif', textAlign: 'left', width: '100%', marginBottom: 2, transition: 'all var(--transition-fast)', borderLeft: `2px solid ${settingsTab === tab.id ? 'var(--accent-teal)' : 'transparent'}` }}
+              style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', borderRadius: 'var(--radius-md)', background: settingsTab === tab.id ? 'rgba(0,229,200,0.08)' : 'none', border: 'none', color: settingsTab === tab.id ? 'var(--accent-teal)' : 'var(--text-secondary)', fontSize: 13, fontWeight: settingsTab === tab.id ? 700 : 500, cursor: 'pointer', fontFamily: "'Plus Jakarta Sans', sans-serif", textAlign: 'left', width: '100%', marginBottom: 2, transition: 'all var(--transition-fast)', borderLeft: `2px solid ${settingsTab === tab.id ? 'var(--accent-teal)' : 'transparent'}` }}
               onMouseEnter={e => { if (settingsTab !== tab.id) e.currentTarget.style.background = 'var(--bg-elevated)'; }}
               onMouseLeave={e => { if (settingsTab !== tab.id) e.currentTarget.style.background = 'none'; }}
             >
@@ -124,7 +124,7 @@ function GeneralTab() {
         <div style={{ display: 'flex', gap: 8 }}>
           {['system', 'light', 'dark'].map(t => (
             <button key={t} onClick={() => setTheme(t)}
-              style={{ flex: 1, padding: '10px 0', background: theme === t ? 'var(--accent-teal-dim)' : 'var(--bg-overlay)', border: `1px solid ${theme === t ? 'var(--accent-teal)' : 'var(--border-subtle)'}`, borderRadius: 'var(--radius-md)', color: theme === t ? 'var(--accent-teal)' : 'var(--text-secondary)', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif', transition: 'all var(--transition-fast)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              style={{ flex: 1, padding: '10px 0', background: theme === t ? 'var(--accent-teal-dim)' : 'var(--bg-overlay)', border: `1px solid ${theme === t ? 'var(--accent-teal)' : 'var(--border-subtle)'}`, borderRadius: 'var(--radius-md)', color: theme === t ? 'var(--accent-teal)' : 'var(--text-secondary)', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif', transition: 'all var(--transition-fast)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
               <span style={{ fontSize: 16 }}>{t === 'system' ? '🖥' : t === 'light' ? '☀️' : '🌙'}</span>
               {t.charAt(0).toUpperCase() + t.slice(1)}
             </button>
@@ -248,7 +248,7 @@ function APIKeysTab() {
     // Validate key format
     const rules = API_KEY_VALIDATION[provider];
     if (rules) {
-      if (rules.prefix && !val.startsWith(rules.prefix)) {
+      if (rules.prefix && !val.startsWith(rules.prefix) && !(rules.altPrefix && val.startsWith(rules.altPrefix))) {
         toast.error(`Invalid key format. ${rules.label}`);
         return;
       }
@@ -344,7 +344,7 @@ function APIKeysTab() {
                   placeholder="Cloudflare Account ID"
                   value={keys[`${provider.id}_account`] || ''}
                   onChange={e => setKeys(k => ({ ...k, [`${provider.id}_account`]: e.target.value }))}
-                  style={{ width: '100%', padding: '8px 12px', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 13, fontFamily: 'Space Grotesk, sans-serif', outline: 'none', marginBottom: 8 }}
+                  style={{ width: '100%', padding: '8px 12px', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 13, fontFamily: 'Plus Jakarta Sans, sans-serif', outline: 'none', marginBottom: 8 }}
                 />
               )}
 
@@ -353,7 +353,7 @@ function APIKeysTab() {
                   <Button variant="secondary" size="sm" loading={testing[provider.id]} onClick={() => testKey(provider.id)}>
                     {result === 'success' ? '✓ Test passed' : result === 'error' ? '✗ Test failed' : 'Test Connection'}
                   </Button>
-                  <button onClick={() => deleteKey(provider.id)} style={{ padding: '5px 12px', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 'var(--radius-sm)', color: 'var(--danger)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>
+                  <button onClick={() => deleteKey(provider.id)} style={{ padding: '5px 12px', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 'var(--radius-sm)', color: 'var(--danger)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                     Remove
                   </button>
                 </div>
@@ -432,7 +432,7 @@ function ProfileTab() {
 
       <Section title="Display Name">
         <div style={{ display: 'flex', gap: 10 }}>
-          <input value={name} onChange={e => setName(e.target.value)} style={{ flex: 1, padding: '9px 14px', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 14, fontFamily: 'Space Grotesk, sans-serif', outline: 'none' }}
+          <input value={name} onChange={e => setName(e.target.value)} style={{ flex: 1, padding: '9px 14px', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 14, fontFamily: 'Plus Jakarta Sans, sans-serif', outline: 'none' }}
             onFocus={e => e.target.style.borderColor = 'var(--accent-teal)'}
             onBlur={e => e.target.style.borderColor = 'var(--border-subtle)'}
           />
@@ -475,7 +475,7 @@ function ProfileTab() {
               <h3 style={{ color: 'var(--danger)', marginBottom: 12 }}>Delete Account?</h3>
               <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16 }}>This will permanently delete all your conversations, settings, and data. Type <strong>DELETE</strong> to confirm.</p>
               <input value={deleteConfirm} onChange={e => setDeleteConfirm(e.target.value)} placeholder="Type DELETE here"
-                style={{ width: '100%', padding: '9px 12px', background: 'var(--bg-overlay)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 14, fontFamily: 'Space Grotesk, sans-serif', outline: 'none', marginBottom: 16 }} />
+                style={{ width: '100%', padding: '9px 12px', background: 'var(--bg-overlay)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 14, fontFamily: 'Plus Jakarta Sans, sans-serif', outline: 'none', marginBottom: 16 }} />
               <div style={{ display: 'flex', gap: 10 }}>
                 <Button variant="danger" fullWidth onClick={deleteAccount} disabled={deleteConfirm !== 'DELETE'}>Delete Forever</Button>
                 <Button variant="secondary" fullWidth onClick={() => setDeleteModal(false)}>Cancel</Button>
@@ -551,7 +551,7 @@ function SubscriptionTab() {
           <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>MirraSync Pro</p>
           <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '3px 0 0' }}>Priority support, exclusive models, team features</p>
         </div>
-        <button style={{ padding: '9px 20px', background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-muted)', fontSize: 13, fontWeight: 700, cursor: 'default', fontFamily: 'Space Grotesk, sans-serif' }}>
+        <button style={{ padding: '9px 20px', background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-muted)', fontSize: 13, fontWeight: 700, cursor: 'default', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
           Coming Soon
         </button>
       </div>
@@ -588,7 +588,7 @@ function CustomDropdown({ value, onChange, options }) {
           width: '100%', padding: '10px 14px', background: 'var(--bg-overlay)',
           border: `1px solid ${open ? 'var(--accent-teal)' : 'var(--border-subtle)'}`,
           borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 14,
-          fontFamily: 'Space Grotesk, sans-serif', cursor: 'pointer', textAlign: 'left',
+          fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer', textAlign: 'left',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           transition: 'border-color 0.2s ease',
         }}
@@ -621,7 +621,7 @@ function CustomDropdown({ value, onChange, options }) {
                 style={{
                   width: '100%', padding: '9px 14px', background: value === opt.value ? 'var(--accent-teal-dim)' : 'transparent',
                   border: 'none', color: value === opt.value ? 'var(--accent-teal)' : 'var(--text-secondary)',
-                  fontSize: 14, fontFamily: 'Space Grotesk, sans-serif', cursor: 'pointer', textAlign: 'left',
+                  fontSize: 14, fontFamily: 'Plus Jakarta Sans, sans-serif', cursor: 'pointer', textAlign: 'left',
                   display: 'flex', alignItems: 'center', gap: 10, transition: 'all 0.1s ease',
                 }}
                 onMouseEnter={e => { if (value !== opt.value) e.currentTarget.style.background = 'var(--bg-hover)'; }}

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+﻿import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -65,15 +65,19 @@ export default function ModelColumn({ model, userMessages, response, isSingle, i
     }}>
       {/* Column Header */}
       <div style={{
-        padding: '7px 14px',
+        padding: '8px 14px',
         borderBottom: '1px solid var(--border-subtle)',
         display: 'flex',
         alignItems: 'center',
         gap: 8,
         background: 'var(--bg-surface)',
         flexShrink: 0,
-        minHeight: 36,
+        minHeight: 38,
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        {/* Accent top bar */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1.5, background: isStreaming ? 'linear-gradient(90deg, var(--accent-teal), var(--accent-violet))' : isDone ? 'var(--accent-teal)' : 'transparent', transition: 'background 0.4s ease' }} />
         <span style={{ display: 'flex', flexShrink: 0, width: 16, height: 16, alignItems: 'center', justifyContent: 'center' }} dangerouslySetInnerHTML={{ __html: getModelIcon(model.id, model.provider, 16) }} />
         <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-secondary)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {model.displayName}
@@ -85,9 +89,9 @@ export default function ModelColumn({ model, userMessages, response, isSingle, i
           </span>
         )}
         {isStreaming && (
-          <div style={{ display: 'flex', gap: 2, alignItems: 'center', flexShrink: 0 }}>
+          <div style={{ display: 'flex', gap: 3, alignItems: 'center', flexShrink: 0 }}>
             {[0, 1, 2].map(i => (
-              <div key={i} style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--accent-teal)', animation: `wave 1.2s ease ${i * 0.15}s infinite` }} />
+              <div key={i} style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--accent-teal)', animation: `wave 1.2s ease ${i * 0.18}s infinite`, boxShadow: '0 0 4px var(--accent-teal)' }} />
             ))}
           </div>
         )}
@@ -112,8 +116,8 @@ export default function ModelColumn({ model, userMessages, response, isSingle, i
             }}>
               <div style={{
                 maxWidth: isSingle ? '78%' : '100%',
-                background: isSingle ? 'var(--accent-teal-dim)' : 'var(--bg-elevated)',
-                border: `1px solid ${isSingle ? 'rgba(0,212,170,0.2)' : 'var(--border-subtle)'}`,
+                background: isSingle ? 'rgba(0,229,200,0.08)' : 'var(--bg-elevated)',
+                border: `1px solid ${isSingle ? 'rgba(0,229,200,0.18)' : 'var(--border-subtle)'}`,
                 borderRadius: 'var(--radius-lg)',
                 padding: '10px 14px',
               }}>
@@ -174,7 +178,7 @@ function AIResponseBlock({ content, isStreaming, isDone, hasError, error, onRetr
           <div style={{ flex: 1 }}>
             <p style={{ fontSize: 13, color: 'var(--danger)', fontWeight: 700, margin: '0 0 3px' }}>Model unavailable</p>
             <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '0 0 10px', lineHeight: 1.5 }}>{error?.message || 'An unexpected error occurred'}</p>
-            <button onClick={onRetry} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '5px 12px', background: 'var(--danger)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>
+            <button onClick={onRetry} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '5px 12px', background: 'var(--danger)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
               <RefreshCw size={11} /> Try Again
             </button>
           </div>
@@ -276,7 +280,7 @@ function CopyCodeButton({ code }) {
   return (
     <button
       onClick={async () => { await navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
-      style={{ background: 'none', border: 'none', cursor: 'pointer', color: copied ? '#3fb950' : '#8b949e', fontSize: 11, fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}
+      style={{ background: 'none', border: 'none', cursor: 'pointer', color: copied ? '#3fb950' : '#8b949e', fontSize: 11, fontFamily: 'Plus Jakarta Sans, sans-serif', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}
     >
       {copied ? <><Check size={11} /> Copied</> : <><Copy size={11} /> Copy</>}
     </button>
@@ -288,7 +292,7 @@ function ActionBtn({ children, onClick, title }) {
     <button
       onClick={onClick}
       title={title}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 8px', background: 'none', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', color: 'var(--text-muted)', fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif', transition: 'all 150ms' }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 8px', background: 'none', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', color: 'var(--text-muted)', fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif', transition: 'all 150ms' }}
       onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-hover)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
       onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'var(--text-muted)'; }}
     >

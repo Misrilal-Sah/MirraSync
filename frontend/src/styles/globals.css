@@ -1,74 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 /* ─── DESIGN TOKENS ─────────────────────────────────────────── */
 :root {
   /* Dark mode (default) */
-  --bg-base: #0a0a0f;
-  --bg-surface: #111118;
-  --bg-elevated: #1a1a24;
-  --bg-overlay: #252535;
-  --bg-hover: #2e2e40;
-  --border-subtle: #2a2a3a;
-  --border-default: #3a3a4f;
-  --border-strong: #4a4a64;
+  --bg-base: #050509;
+  --bg-surface: #0a0a13;
+  --bg-elevated: #101020;
+  --bg-overlay: #171728;
+  --bg-hover: #1f1f38;
+  --border-subtle: #1c1c36;
+  --border-default: #2a2a48;
+  --border-strong: #3c3c60;
   --text-primary: #f0f0ff;
-  --text-secondary: #b0b0d0;
-  --text-muted: #7878a0;
-  --accent-teal: #00d4aa;
-  --accent-teal-dim: rgba(0, 212, 170, 0.15);
-  --accent-teal-glow: rgba(0, 212, 170, 0.25);
-  --accent-blue: #0ea5e9;
-  --accent-blue-dim: rgba(14, 165, 233, 0.15);
-  --accent-purple: #7c3aed;
-  --accent-gradient: linear-gradient(135deg, #00d4aa, #0ea5e9);
-  --accent-gradient-full: linear-gradient(135deg, #00d4aa, #0ea5e9, #7c3aed);
+  --text-secondary: #a8a8cc;
+  --text-muted: #66669a;
+
+  /* Aurora Accent Palette */
+  --accent-teal: #00e5c8;
+  --accent-teal-dim: rgba(0, 229, 200, 0.12);
+  --accent-teal-glow: rgba(0, 229, 200, 0.22);
+  --accent-blue: #4f8ef7;
+  --accent-blue-dim: rgba(79, 142, 247, 0.12);
+  --accent-violet: #8b5cf6;
+  --accent-violet-dim: rgba(139, 92, 246, 0.12);
+  --accent-pink: #ec4899;
+  --accent-pink-dim: rgba(236, 72, 153, 0.12);
+  --accent-purple: #8b5cf6;
+
+  /* Aurora Gradients */
+  --accent-gradient: linear-gradient(135deg, #00e5c8, #4f8ef7);
+  --accent-gradient-full: linear-gradient(135deg, #00e5c8, #4f8ef7, #8b5cf6, #ec4899);
+  --aurora-gradient: linear-gradient(135deg, #00e5c8 0%, #4f8ef7 38%, #8b5cf6 68%, #ec4899 100%);
+  --aurora-bg: linear-gradient(135deg, rgba(0,229,200,0.05) 0%, rgba(79,142,247,0.04) 35%, rgba(139,92,246,0.05) 65%, rgba(236,72,153,0.04) 100%);
+
+  /* Semantic Colors */
   --danger: #ef4444;
-  --danger-dim: rgba(239, 68, 68, 0.15);
+  --danger-dim: rgba(239, 68, 68, 0.12);
   --warning: #f59e0b;
-  --warning-dim: rgba(245, 158, 11, 0.15);
+  --warning-dim: rgba(245, 158, 11, 0.12);
   --success: #22c55e;
-  --success-dim: rgba(34, 197, 94, 0.15);
+  --success-dim: rgba(34, 197, 94, 0.12);
+
+  /* Border Radius */
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
-  --shadow-glow-teal: 0 0 20px rgba(0, 212, 170, 0.25);
-  --shadow-glow-blue: 0 0 20px rgba(14, 165, 233, 0.25);
-  --shadow-glow-teal-strong: 0 0 40px rgba(0, 212, 170, 0.4);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.55);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.65);
+  --shadow-lg: 0 8px 48px rgba(0,0,0,0.75);
+  --shadow-glow-teal: 0 0 24px rgba(0, 229, 200, 0.18);
+  --shadow-glow-blue: 0 0 24px rgba(79, 142, 247, 0.18);
+  --shadow-glow-teal-strong: 0 0 48px rgba(0, 229, 200, 0.3);
+  --shadow-aurora: 0 0 80px rgba(0,229,200,0.1), 0 0 160px rgba(139,92,246,0.08);
+
+  /* App Layout */
   --sidebar-width: 260px;
   --topbar-height: 52px;
   --input-bar-height: 80px;
+
+  /* Typography */
   --font-sm: 13px;
   --font-md: 14px;
   --font-base: 15px;
   --font-lg: 17px;
+
+  /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
 }
 
 [data-theme="light"] {
-  --bg-base: #f0f0f8;
+  --bg-base: #f0f0f9;
   --bg-surface: #ffffff;
-  --bg-elevated: #f8f8ff;
-  --bg-overlay: #ebebf8;
-  --bg-hover: #e0e0f0;
-  --border-subtle: #ddddf0;
-  --border-default: #c8c8e0;
-  --border-strong: #a0a0c0;
-  --text-primary: #0a0a1a;
-  --text-secondary: #404060;
-  --text-muted: #8080a0;
-  --accent-teal-dim: rgba(0, 180, 140, 0.12);
-  --accent-teal-glow: rgba(0, 180, 140, 0.2);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --bg-elevated: #f7f7fe;
+  --bg-overlay: #eaeaf6;
+  --bg-hover: #e0e0f2;
+  --border-subtle: #dcdcf0;
+  --border-default: #c6c6e4;
+  --border-strong: #9e9ecc;
+  --text-primary: #080816;
+  --text-secondary: #3c3c60;
+  --text-muted: #7878a8;
+  --accent-teal-dim: rgba(0, 196, 168, 0.1);
+  --accent-teal-glow: rgba(0, 196, 168, 0.18);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.09);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.11);
 }
 
 /* ─── FONT SIZE VARIANTS ─────────────────────────────────────── */
@@ -86,7 +109,7 @@ html {
 }
 
 body {
-  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-base);
   color: var(--text-primary);
   font-size: var(--font-base);
@@ -127,13 +150,39 @@ a:hover { opacity: 0.8; }
 
 /* ─── GLASS MORPHISM ──────────────────────────────────────────── */
 .glass {
-  background: rgba(17, 17, 24, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(8, 8, 18, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
+}
+.glass-strong {
+  background: rgba(8, 8, 18, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-default);
 }
 [data-theme="light"] .glass {
   background: rgba(255, 255, 255, 0.85);
+}
+[data-theme="light"] .glass-strong {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+/* ─── GRADIENT BORDER ───────────────────────────────────────────── */
+.aurora-border {
+  position: relative;
+}
+.aurora-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--aurora-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* ─── FOCUS STYLES ───────────────────────────────────────────── */
@@ -220,6 +269,16 @@ a:hover { opacity: 0.8; }
   60% { transform: scale(1.05); }
   100% { transform: scale(1); opacity: 1; }
 }
+@keyframes aurora-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(28px, -18px) scale(1.04); }
+  66% { transform: translate(-18px, 14px) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes aurora-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
 
 .animate-fadeIn { animation: fadeIn var(--transition-base) forwards; }
 .animate-slideUp { animation: slideUp var(--transition-base) forwards; }
@@ -236,6 +295,50 @@ a:hover { opacity: 0.8; }
   color: var(--accent-teal);
   animation: blink 1s step-end infinite;
   font-size: 0.85em;
+}
+
+/* ─── AURORA BACKGROUND ORBS ────────────────────────────────────── */
+.aurora-orbs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: aurora-drift 14s ease-in-out infinite, aurora-pulse 8s ease-in-out infinite;
+}
+.aurora-orb-1 {
+  background: radial-gradient(circle, rgba(0,229,200,0.55) 0%, transparent 70%);
+  width: 700px; height: 700px;
+  top: -8%; left: -5%;
+  animation-duration: 12s, 7s;
+}
+.aurora-orb-2 {
+  background: radial-gradient(circle, rgba(79,142,247,0.45) 0%, transparent 70%);
+  width: 580px; height: 580px;
+  top: 25%; right: -8%;
+  animation-duration: 15s, 9s;
+  animation-direction: reverse, normal;
+}
+.aurora-orb-3 {
+  background: radial-gradient(circle, rgba(139,92,246,0.42) 0%, transparent 70%);
+  width: 520px; height: 520px;
+  top: 50%; left: 38%;
+  animation-duration: 18s, 11s;
+  animation-delay: 2s, 1s;
+}
+.aurora-orb-4 {
+  background: radial-gradient(circle, rgba(236,72,153,0.35) 0%, transparent 70%);
+  width: 400px; height: 400px;
+  bottom: 5%; left: 8%;
+  animation-duration: 10s, 6s;
+  animation-direction: reverse, reverse;
+  animation-delay: 1s, 3s;
 }
 
 /* ─── UTILITY ────────────────────────────────────────────────── */

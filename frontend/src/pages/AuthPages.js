@@ -1,4 +1,4 @@
-// ─── SIGNUP ──────────────────────────────────────────────────────────────────
+﻿// ─── SIGNUP ──────────────────────────────────────────────────────────────────
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -45,17 +45,22 @@ export function SignupPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 600, height: 600, background: 'radial-gradient(circle, rgba(14,165,233,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} style={{ width: '100%', maxWidth: 440 }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+    <div style={{ minHeight: '100vh', background: '#050509', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", position: 'relative', overflow: 'hidden' }}>
+      {/* Aurora orbs */}
+      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+        <div className="aurora-orb aurora-orb-1" style={{ width: 480, height: 480, top: '-15%', right: '-8%', opacity: 0.4 }} />
+        <div className="aurora-orb aurora-orb-3" style={{ width: 360, height: 360, bottom: '-10%', left: '-5%', opacity: 0.35 }} />
+      </div>
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} style={{ width: '100%', maxWidth: 440, position: 'relative', zIndex: 1 }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <img src={LOGO_URL} alt="MirraSync" style={{ width: 36, height: 36, borderRadius: '50%' }} />
-            <span style={{ fontSize: 28, color: 'white', fontWeight: 800, background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>MirraSync</span>
+            <img src={LOGO_URL} alt="MirraSync" style={{ width: 36, height: 36, borderRadius: '50%', boxShadow: '0 0 24px rgba(0,229,200,0.2)' }} />
+            <span style={{ fontSize: 26, fontWeight: 800, background: 'linear-gradient(135deg, #00e5c8, #4f8ef7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', letterSpacing: '-0.5px' }}>MirraSync</span>
           </Link>
-          <p style={{ color: 'var(--text-muted)', fontSize: 14, marginTop: 6 }}>Create your free account</p>
+          <p style={{ color: '#66669a', fontSize: 14, marginTop: 6 }}>Create your free account</p>
         </div>
-        <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-xl)', padding: 32, boxShadow: 'var(--shadow-lg)' }}>
+        <div className="auth-card" style={{ background: 'rgba(10,10,19,0.88)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20, padding: 28, boxShadow: '0 16px 64px rgba(0,0,0,0.6)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1.5, background: 'linear-gradient(90deg, #00e5c8, #4f8ef7, #8b5cf6)' }} />
           {errors.general && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ background: 'var(--danger-dim)', border: '1px solid var(--danger)', borderRadius: 'var(--radius-md)', padding: '10px 14px', fontSize: 13, color: 'var(--danger)', marginBottom: 16 }}>⚠ {errors.general}</motion.div>}
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <Input label="Full name" placeholder="John Smith" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} error={errors.name} autoFocus />
@@ -64,7 +69,7 @@ export function SignupPage() {
             <Input label="Confirm password" type="password" placeholder="••••••••" value={form.confirm} onChange={(e) => setForm({ ...form, confirm: e.target.value })} error={errors.confirm} />
             <Button type="submit" loading={loading} fullWidth size="lg">Create Account</Button>
           </form>
-          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)', marginTop: 20 }}>
+          <p style={{ textAlign: 'center', fontSize: 13, color: '#66669a', marginTop: 20 }}>
             Already have an account? <Link to="/login" style={{ color: 'var(--accent-teal)', fontWeight: 600 }}>Sign in</Link>
           </p>
         </div>
@@ -177,7 +182,7 @@ export function VerifyEmailPage() {
           </Link>
           {/* Animated gradient bar */}
           <motion.div
-            style={{ height: 3, background: 'linear-gradient(90deg, #00d4aa, #0ea5e9, #7c3aed, #00d4aa)', backgroundSize: '200% 100%', borderRadius: 2, margin: '12px auto 0', maxWidth: 200 }}
+            style={{ height: 3, background: 'linear-gradient(90deg, #00e5c8, #0ea5e9, #7c3aed, #00e5c8)', backgroundSize: '200% 100%', borderRadius: 2, margin: '12px auto 0', maxWidth: 200 }}
             animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
           />
@@ -248,7 +253,7 @@ export function VerifyEmailPage() {
             {resendCooldown > 0 ? (
               <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>Resend in {resendCooldown}s</p>
             ) : (
-              <button onClick={handleResend} style={{ background: 'none', border: 'none', color: 'var(--accent-teal)', fontSize: 13, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600 }}>
+              <button onClick={handleResend} style={{ background: 'none', border: 'none', color: 'var(--accent-teal)', fontSize: 13, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif', fontWeight: 600 }}>
                 Resend code
               </button>
             )}
@@ -317,11 +322,11 @@ export function ForgotPasswordPage() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <span style={{ fontSize: 24, fontWeight: 800, background: 'linear-gradient(135deg, #00d4aa, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>MirraSync</span>
+            <span style={{ fontSize: 24, fontWeight: 800, background: 'linear-gradient(135deg, #00e5c8, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>MirraSync</span>
           </Link>
           {/* Animated gradient bar */}
           <motion.div
-            style={{ height: 3, background: 'linear-gradient(90deg, #00d4aa, #0ea5e9, #7c3aed, #00d4aa)', backgroundSize: '200% 100%', borderRadius: 2, margin: '12px auto 0', maxWidth: 200 }}
+            style={{ height: 3, background: 'linear-gradient(90deg, #00e5c8, #0ea5e9, #7c3aed, #00e5c8)', backgroundSize: '200% 100%', borderRadius: 2, margin: '12px auto 0', maxWidth: 200 }}
             animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
           />

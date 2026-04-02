@@ -75,7 +75,7 @@ router.post('/', chatbotLimiter, async (req, res) => {
         'Authorization': `Bearer ${groqApiKey}`,
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
         messages,
         temperature: 0.4,
         max_tokens: 512,
@@ -92,7 +92,7 @@ router.post('/', chatbotLimiter, async (req, res) => {
     const data = await response.json();
     const reply = data.choices?.[0]?.message?.content || 'Sorry, I could not generate a response. Please try again.';
 
-    res.json({ reply, model: 'llama-3.3-70b-versatile' });
+    res.json({ reply, model: 'meta-llama/llama-4-scout-17b-16e-instruct' });
   } catch (err) {
     console.error('Chatbot error:', err);
     res.status(500).json({ error: 'Something went wrong. Please try again.' });

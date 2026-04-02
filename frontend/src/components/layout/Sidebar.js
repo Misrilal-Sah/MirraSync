@@ -56,7 +56,7 @@ export default function Sidebar() {
     Older: conversations.filter(c => !c.pinned && isOlder(new Date(c.updatedAt), now)),
   };
 
-  const initials = user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'MS';
+  const initials = user?.name ? user.name.split(' ')[0][0].toUpperCase() : 'M';
 
   return (
     <div style={{
@@ -85,9 +85,10 @@ export default function Sidebar() {
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
               <img src={LOGO_URL} alt="MirraSync" style={{ width: 28, height: 28, borderRadius: '50%', flexShrink: 0 }} />
               <span style={{
-                fontSize: 18, fontWeight: 800,
-                background: 'var(--accent-gradient)',
+                fontSize: 17, fontWeight: 800,
+                background: 'var(--aurora-gradient)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                letterSpacing: '-0.3px',
               }}>MirraSync</span>
             </Link>
             <button
@@ -105,10 +106,10 @@ export default function Sidebar() {
             onClick={handleNewChat}
             style={{
               width: '100%', padding: '8px 12px',
-              background: 'var(--accent-gradient)', border: 'none',
+              background: 'var(--aurora-gradient)', border: 'none',
               borderRadius: 'var(--radius-md)', color: '#fff',
               fontSize: 13, fontWeight: 700, cursor: 'pointer',
-              fontFamily: 'Space Grotesk, sans-serif',
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
               boxShadow: 'var(--shadow-glow-teal)',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
@@ -176,11 +177,12 @@ export default function Sidebar() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 8px', marginBottom: 4 }}>
                 <div style={{
                   width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
-                  background: user.avatarUrl ? 'transparent' : 'var(--accent-gradient)',
+                  background: 'var(--accent-gradient)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 12, fontWeight: 700, color: '#fff', overflow: 'hidden',
+                  fontSize: 14, fontWeight: 800, color: '#fff', overflow: 'hidden',
+                  letterSpacing: '-0.5px',
                 }}>
-                  {user.avatarUrl ? <img src={user.avatarUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : initials}
+                  {initials}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.name}</p>
@@ -192,8 +194,8 @@ export default function Sidebar() {
             </>
           ) : (
             <div style={{ display: 'flex', gap: 6 }}>
-              <button onClick={() => navigate('/login')} style={{ flex: 1, padding: '8px', background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-secondary)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>Sign in</button>
-              <button onClick={() => navigate('/signup')} style={{ flex: 1, padding: '8px', background: 'var(--accent-gradient)', border: 'none', borderRadius: 'var(--radius-md)', color: '#fff', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>Sign up</button>
+              <button onClick={() => navigate('/login')} style={{ flex: 1, padding: '8px', background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', color: 'var(--text-secondary)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Sign in</button>
+              <button onClick={() => navigate('/signup')} style={{ flex: 1, padding: '8px', background: 'var(--aurora-gradient)', border: 'none', borderRadius: 'var(--radius-md)', color: '#fff', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: "'Plus Jakarta Sans', sans-serif", boxShadow: 'var(--shadow-glow-teal)' }}>Sign up</button>
             </div>
           )}
         </div>
@@ -211,7 +213,7 @@ function NavItem({ icon, label, onClick, danger }) {
         padding: '7px 10px', background: 'none', border: 'none',
         borderRadius: 'var(--radius-sm)', cursor: 'pointer',
         color: danger ? 'var(--danger)' : 'var(--text-secondary)',
-        fontSize: 13, fontFamily: 'Space Grotesk, sans-serif', fontWeight: 500,
+        fontSize: 13, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 500,
         transition: 'all var(--transition-fast)', textAlign: 'left',
       }}
       onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-hover)'; e.currentTarget.style.color = danger ? 'var(--danger)' : 'var(--text-primary)'; }}
@@ -235,7 +237,7 @@ function ConvItem({ conv, isActive, isEditing, editTitle, onEditTitleChange, onS
         display: 'flex', alignItems: 'center', gap: 6,
         padding: '6px 8px', borderRadius: 'var(--radius-sm)',
         cursor: 'pointer',
-        background: isActive ? 'var(--accent-teal-dim)' : hovered ? 'var(--bg-hover)' : 'transparent',
+        background: isActive ? 'rgba(0,229,200,0.1)' : hovered ? 'var(--bg-hover)' : 'transparent',
         borderLeft: isActive ? '2px solid var(--accent-teal)' : '2px solid transparent',
         transition: 'all var(--transition-fast)',
         marginBottom: 1,
@@ -254,7 +256,7 @@ function ConvItem({ conv, isActive, isEditing, editTitle, onEditTitleChange, onS
           style={{
             flex: 1, background: 'var(--bg-overlay)', border: '1px solid var(--accent-teal)',
             borderRadius: 'var(--radius-xs)', padding: '2px 6px',
-            fontSize: 12, color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif', outline: 'none',
+            fontSize: 12, color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif", outline: 'none',
           }}
         />
       ) : (

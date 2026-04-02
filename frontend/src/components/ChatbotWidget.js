@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../lib/api';
 import { LOGO_URL } from '../lib/modelRegistry';
@@ -56,7 +56,7 @@ export default function ChatbotWidget() {
         style={{
           position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
           width: 56, height: 56, borderRadius: '50%',
-          background: 'linear-gradient(135deg, #00d4aa, #0ea5e9)',
+          background: 'linear-gradient(135deg, #00e5c8, #0ea5e9)',
           border: 'none', cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: '0 4px 20px rgba(0,212,170,0.4)',
@@ -83,7 +83,7 @@ export default function ChatbotWidget() {
               borderRadius: 16, overflow: 'hidden',
               display: 'flex', flexDirection: 'column',
               boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
             }}
           >
             {/* Header */}
@@ -96,9 +96,9 @@ export default function ChatbotWidget() {
               <img src={LOGO_URL} alt="MirraSync" style={{ width: 28, height: 28, borderRadius: '50%' }} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 14, fontWeight: 700, color: '#f0f0ff' }}>MirraSync Assistant</div>
-                <div style={{ fontSize: 11, color: '#7878a0' }}>Ask me about MirraSync</div>
+                <div style={{ fontSize: 11, color: '#66669a' }}>Ask me about MirraSync</div>
               </div>
-              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#00d4aa', boxShadow: '0 0 8px rgba(0,212,170,0.6)' }} />
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#00e5c8', boxShadow: '0 0 8px rgba(0,212,170,0.6)' }} />
             </div>
 
             {/* Messages */}
@@ -118,7 +118,7 @@ export default function ChatbotWidget() {
                     padding: '10px 14px',
                     borderRadius: msg.role === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
                     background: msg.role === 'user'
-                      ? 'linear-gradient(135deg, #00d4aa, #0ea5e9)'
+                      ? 'linear-gradient(135deg, #00e5c8, #0ea5e9)'
                       : 'rgba(255,255,255,0.05)',
                     color: msg.role === 'user' ? '#fff' : '#d0d0f0',
                     fontSize: 13, lineHeight: 1.6,
@@ -138,7 +138,7 @@ export default function ChatbotWidget() {
                     borderRadius: '14px 14px 14px 4px',
                     background: 'rgba(255,255,255,0.05)',
                     border: '1px solid rgba(255,255,255,0.06)',
-                    color: '#7878a0', fontSize: 13,
+                    color: '#66669a', fontSize: 13,
                   }}
                 >
                   <span style={{ display: 'inline-flex', gap: 3 }}>
@@ -146,7 +146,7 @@ export default function ChatbotWidget() {
                       <motion.span key={i}
                         animate={{ opacity: [0.3, 1, 0.3] }}
                         transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                        style={{ width: 6, height: 6, borderRadius: '50%', background: '#00d4aa', display: 'inline-block' }}
+                        style={{ width: 6, height: 6, borderRadius: '50%', background: '#00e5c8', display: 'inline-block' }}
                       />
                     ))}
                   </span>
@@ -172,7 +172,7 @@ export default function ChatbotWidget() {
                   background: 'rgba(255,255,255,0.05)',
                   border: '1px solid rgba(255,255,255,0.08)',
                   borderRadius: 10, color: '#f0f0ff',
-                  fontSize: 13, fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: 13, fontFamily: "'Plus Jakarta Sans', sans-serif",
                   outline: 'none',
                 }}
               />
@@ -181,7 +181,7 @@ export default function ChatbotWidget() {
                 disabled={loading || !input.trim()}
                 style={{
                   width: 36, height: 36, borderRadius: 10,
-                  background: input.trim() ? 'linear-gradient(135deg, #00d4aa, #0ea5e9)' : 'rgba(255,255,255,0.06)',
+                  background: input.trim() ? 'linear-gradient(135deg, #00e5c8, #0ea5e9)' : 'rgba(255,255,255,0.06)',
                   border: 'none', cursor: input.trim() ? 'pointer' : 'default',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: '#fff', fontSize: 14, flexShrink: 0,
@@ -199,7 +199,7 @@ export default function ChatbotWidget() {
               textAlign: 'center',
             }}>
               <span style={{ fontSize: 10, color: '#5858a0' }}>
-                Powered by MirraSync AI · <a href="mailto:support@mirrasync.com" style={{ color: '#00d4aa', textDecoration: 'none' }}>Contact Support</a>
+                Powered by MirraSync AI · <a href="mailto:support@mirrasync.com" style={{ color: '#00e5c8', textDecoration: 'none' }}>Contact Support</a>
               </span>
             </div>
           </motion.div>

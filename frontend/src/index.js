@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -19,7 +19,7 @@ root.render(
           color: 'var(--text-primary)',
           border: '1px solid var(--border-default)',
           borderRadius: 'var(--radius-md)',
-          fontFamily: 'Space Grotesk, sans-serif',
+          fontFamily: 'Plus Jakarta Sans, sans-serif',
           fontSize: '14px',
           boxShadow: 'var(--shadow-lg)',
           padding: '12px 16px',

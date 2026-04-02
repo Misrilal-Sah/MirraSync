@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /* ─── BUTTON ─────────────────────────────────────────────────── */
@@ -58,7 +58,7 @@ export function Button({
         alignItems: 'center',
         justifyContent: 'center',
         gap: '8px',
-        fontFamily: 'Space Grotesk, sans-serif',
+        fontFamily: 'Plus Jakarta Sans, sans-serif',
         fontWeight: 600,
         cursor: disabled || loading ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.5 : 1,
@@ -124,7 +124,7 @@ export function Input({
             borderRadius: 'var(--radius-md)',
             color: 'var(--text-primary)',
             fontSize: '14px',
-            fontFamily: 'Space Grotesk, sans-serif',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
             outline: 'none',
             transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)',
             cursor: disabled ? 'not-allowed' : 'text',
@@ -475,7 +475,7 @@ export function Dropdown({ trigger, items, align = 'left' }) {
                     width: '100%', padding: '9px 14px',
                     background: 'none', border: 'none',
                     color: item.danger ? 'var(--danger)' : 'var(--text-secondary)',
-                    fontSize: '13px', fontFamily: 'Space Grotesk, sans-serif',
+                    fontSize: '13px', fontFamily: 'Plus Jakarta Sans, sans-serif',
                     cursor: item.disabled ? 'not-allowed' : 'pointer',
                     opacity: item.disabled ? 0.5 : 1,
                     textAlign: 'left', transition: 'all var(--transition-fast)',

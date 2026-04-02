@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
@@ -240,7 +240,7 @@ export default function ChatPage() {
                   borderRadius: 'var(--radius-full)',
                   color: 'var(--accent-teal)',
                   fontSize: 12, fontWeight: 600, cursor: 'pointer',
-                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
                   transition: 'all var(--transition-fast)',
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,212,170,0.2)'}

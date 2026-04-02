@@ -175,17 +175,17 @@ const MODEL_REGISTRY = [
 
   // ─── CEREBRAS ───────────────────────────────────────────────────
   {
-    id: 'cerebras-gpt-oss-120b',
-    displayName: 'GPT-OSS 120B',
+    id: 'cerebras-llama33-70b',
+    displayName: 'Llama 3.3 70B',
     provider: 'cerebras',
     providerLabel: 'Cerebras',
-    modelId: 'gpt-oss-120b',
+    modelId: 'llama3.3-70b',
     supportsVision: false,
     supportsFiles: false,
-    supportsReasoning: false,
+    supportsReasoning: true,
     isFree: true,
     requiresUserKey: false,
-    description: 'World\'s fastest inference — 120B parameter model at unbelievable speed',
+    description: 'World\'s fastest inference — 70B Llama at extraordinary speed on Cerebras chips',
     colorAccent: '#ff6b35',
     adapterType: 'openai_compatible',
     baseUrlEnv: 'CEREBRAS_BASE_URL',

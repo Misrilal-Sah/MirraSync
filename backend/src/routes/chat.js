@@ -64,9 +64,14 @@ router.post('/stream', optionalAuth, async (req, res) => {
       where: { userId_provider: { userId: req.user.id, provider: model.provider } }
     });
     if (storedKey) {
-      userApiKey = decrypt(storedKey.encryptedKey);
-      if (storedKey.encryptedAccId) {
-        userAccountId = decrypt(storedKey.encryptedAccId);
+      try {
+        userApiKey = decrypt(storedKey.encryptedKey);
+        if (storedKey.encryptedAccId) {
+          userAccountId = decrypt(storedKey.encryptedAccId);
+        }
+      } catch (decryptErr) {
+        // Key was encrypted with a different ENCRYPTION_KEY — skip it
+        // User needs to re-save their API key in Settings
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import useChatStore from '../../stores/chatStore';
@@ -41,8 +41,7 @@ export default function AddModelModal() {
   // Determine lock state for each model
   const getModelState = (model) => {
     if (model.isPro) {
-      // Unlock Pro model if user has a valid API key for this provider
-      if (!isGuest && hasKeyForProvider(model.provider)) return 'available';
+      // Pro models always require Pro subscription — never unlockable via API key
       return 'pro_locked';
     }
     if (isGuest && !GUEST_FREE_IDS.includes(model.id)) return 'login_locked';
@@ -110,7 +109,7 @@ export default function AddModelModal() {
                 <input
                   value={search} onChange={e => setSearch(e.target.value)} placeholder="Search models..."
                   autoFocus
-                  style={{ width: '100%', padding: '8px 12px 8px 36px', background: 'var(--bg-overlay)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 13, fontFamily: 'Space Grotesk, sans-serif', outline: 'none' }}
+                  style={{ width: '100%', padding: '8px 12px 8px 36px', background: 'var(--bg-overlay)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', color: 'var(--text-primary)', fontSize: 13, fontFamily: 'Plus Jakarta Sans, sans-serif', outline: 'none' }}
                 />
               </div>
 
@@ -118,7 +117,7 @@ export default function AddModelModal() {
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {[{ id: 'all', label: 'All' }, ...PROVIDERS].map(p => (
                   <button key={p.id} onClick={() => setFilterProvider(p.id)}
-                    style={{ padding: '4px 10px', borderRadius: 'var(--radius-full)', border: `1px solid ${filterProvider === p.id ? 'var(--accent-teal)' : 'var(--border-subtle)'}`, background: filterProvider === p.id ? 'var(--accent-teal-dim)' : 'none', color: filterProvider === p.id ? 'var(--accent-teal)' : 'var(--text-muted)', fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif', whiteSpace: 'nowrap', transition: 'all var(--transition-fast)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    style={{ padding: '4px 10px', borderRadius: 'var(--radius-full)', border: `1px solid ${filterProvider === p.id ? 'var(--accent-teal)' : 'var(--border-subtle)'}`, background: filterProvider === p.id ? 'var(--accent-teal-dim)' : 'none', color: filterProvider === p.id ? 'var(--accent-teal)' : 'var(--text-muted)', fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif', whiteSpace: 'nowrap', transition: 'all var(--transition-fast)', display: 'flex', alignItems: 'center', gap: 4 }}>
                     {p.id !== 'all' && <span style={{ display: 'flex', alignItems: 'center' }} dangerouslySetInnerHTML={{ __html: getProviderIcon(p.id, 12) }} />}
                     {p.label}
                   </button>
@@ -218,7 +217,7 @@ export default function AddModelModal() {
                 {activeModelIds.length} model{activeModelIds.length !== 1 ? 's' : ''} selected · max {maxActive}
                 {isGuest && <span style={{ color: 'var(--accent-teal)', marginLeft: 8 }}>Sign in for more →</span>}
               </span>
-              <button onClick={closeAddModelModal} style={{ padding: '8px 20px', background: 'var(--accent-gradient)', border: 'none', borderRadius: 'var(--radius-md)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif' }}>Done</button>
+              <button onClick={closeAddModelModal} style={{ padding: '8px 20px', background: 'var(--accent-gradient)', border: 'none', borderRadius: 'var(--radius-md)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>Done</button>
             </div>
           </motion.div>
         </motion.div>

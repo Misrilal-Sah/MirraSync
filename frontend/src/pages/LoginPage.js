@@ -100,50 +100,56 @@ export default function LoginPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'var(--bg-base)',
+      background: '#050509',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '20px',
       position: 'relative',
       overflow: 'hidden',
+      fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
     }}>
-      {/* Background glow */}
-      <div style={{
-        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-        width: 600, height: 600,
-        background: 'radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      {/* Aurora background orbs */}
+      <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+        <div className="aurora-orb aurora-orb-1" style={{ width: 500, height: 500, top: '-15%', left: '-10%', opacity: 0.45 }} />
+        <div className="aurora-orb aurora-orb-2" style={{ width: 400, height: 400, bottom: '-10%', right: '-8%', opacity: 0.35 }} />
+        <div className="aurora-orb aurora-orb-3" style={{ width: 300, height: 300, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', opacity: 0.3 }} />
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        style={{ width: '100%', maxWidth: 420 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        style={{ width: '100%', maxWidth: 420, position: 'relative', zIndex: 1 }}
       >
         {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <img src={LOGO_URL} alt="MirraSync" style={{ width: 36, height: 36, borderRadius: '50%', boxShadow: '0 0 24px rgba(0,212,170,0.2)' }} />
+            <img src={LOGO_URL} alt="MirraSync" style={{ width: 36, height: 36, borderRadius: '50%', boxShadow: '0 0 24px rgba(0,229,200,0.2)' }} />
             <span style={{
-              fontSize: 28, fontWeight: 800,
-              background: 'var(--accent-gradient)',
+              fontSize: 26, fontWeight: 800,
+              background: 'linear-gradient(135deg, #00e5c8, #4f8ef7, #8b5cf6)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               letterSpacing: '-0.5px',
             }}>MirraSync</span>
           </Link>
-          <p style={{ color: 'var(--text-muted)', fontSize: 14, marginTop: 6 }}>Welcome back</p>
+          <p style={{ color: '#66669a', fontSize: 14, marginTop: 6 }}>Welcome back</p>
         </div>
 
         {/* Card */}
         <div style={{
-          background: 'var(--bg-surface)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-xl)',
-          padding: '32px',
-          boxShadow: 'var(--shadow-lg)',
+          background: 'rgba(10, 10, 19, 0.88)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 20,
+          padding: '28px',
+          boxShadow: '0 16px 64px rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          position: 'relative',
+          overflow: 'hidden',
         }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1.5, background: 'linear-gradient(90deg, #00e5c8, #4f8ef7, #8b5cf6)' }} />
+
           {/* Google Button */}
           <button
             type="button"
@@ -151,15 +157,15 @@ export default function LoginPage() {
             style={{
               width: '100%', padding: '11px 16px',
               background: 'var(--bg-elevated)',
-              border: '1px solid var(--border-default)',
-              borderRadius: 'var(--radius-md)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 12,
               color: 'var(--text-primary)',
-              fontSize: 14, fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600,
+              fontSize: 14, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600,
               cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
               gap: 10, transition: 'all var(--transition-fast)', marginBottom: 20,
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-hover)'; e.currentTarget.style.borderColor = 'var(--border-strong)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-elevated)'; e.currentTarget.style.borderColor = 'var(--border-default)'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-hover)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.16)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-elevated)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
           >
             <GoogleIcon />
             Continue with Google

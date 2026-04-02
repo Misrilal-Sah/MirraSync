@@ -59,8 +59,13 @@ router.post('/:provider/test', authenticate, async (req, res) => {
     });
     if (!storedKey) return res.status(404).json({ error: 'No API key found for this provider.' });
 
-    const decryptedKey = decrypt(storedKey.encryptedKey);
-    const accountId = storedKey.encryptedAccId ? decrypt(storedKey.encryptedAccId) : null;
+    let decryptedKey, accountId;
+    try {
+      decryptedKey = decrypt(storedKey.encryptedKey);
+      accountId = storedKey.encryptedAccId ? decrypt(storedKey.encryptedAccId) : null;
+    } catch (e) {
+      return res.status(400).json({ error: 'API key is corrupted. Please re-save it in Settings.' });
+    }
 
     // Find a model from this provider to test with
     const testModel = MODEL_REGISTRY.find(m => m.provider === provider);

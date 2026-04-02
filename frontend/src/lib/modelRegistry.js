@@ -13,7 +13,7 @@ export const MODEL_REGISTRY = [
   { id: 'groq-kimi-k2', displayName: 'Kimi K2', provider: 'groq', providerLabel: 'Groq', supportsVision: false, supportsReasoning: true, isFree: true, isPro: false, description: 'Exclusive top-tier instruct model', colorAccent: '#f55036', category: 'reasoning' },
   { id: 'groq-llama4-scout', displayName: 'Llama 4 Scout', provider: 'groq', providerLabel: 'Groq', supportsVision: true, supportsReasoning: false, isFree: true, isPro: false, description: "Meta's best Llama 4 on Groq", colorAccent: '#f55036', category: 'fast' },
   { id: 'groq-qwen3-32b', displayName: 'Qwen3 32B', provider: 'groq', providerLabel: 'Groq', supportsVision: false, supportsReasoning: true, isFree: true, isPro: false, description: 'Only 32B Qwen here', colorAccent: '#f55036', category: 'coding' },
-  { id: 'cerebras-gpt-oss-120b', displayName: 'GPT-OSS 120B', provider: 'cerebras', providerLabel: 'Cerebras', supportsVision: false, supportsReasoning: false, isFree: true, isPro: false, description: "World's fastest inference", colorAccent: '#ff6b35', category: 'fast' },
+  { id: 'cerebras-llama33-70b', displayName: 'Llama 3.3 70B', provider: 'cerebras', providerLabel: 'Cerebras', supportsVision: false, supportsReasoning: true, isFree: true, isPro: false, description: "World's fastest inference — 70B Llama on Cerebras chips", colorAccent: '#ff6b35', category: 'fast' },
   { id: 'cerebras-llama31-8b', displayName: 'Llama 3.1 8B', provider: 'cerebras', providerLabel: 'Cerebras', supportsVision: false, supportsReasoning: false, isFree: true, isPro: false, description: 'Instant responses via Cerebras', colorAccent: '#ff6b35', category: 'fast' },
   { id: 'cohere-command-a-reasoning', displayName: 'Command A Reasoning', provider: 'cohere', providerLabel: 'Cohere', supportsVision: false, supportsReasoning: true, isFree: true, isPro: false, description: 'Exclusive reasoning flagship', colorAccent: '#39594d', category: 'reasoning' },
   { id: 'cohere-command-a-vision', displayName: 'Command A Vision', provider: 'cohere', providerLabel: 'Cohere', supportsVision: true, supportsReasoning: false, isFree: true, isPro: false, description: 'Exclusive vision model', colorAccent: '#39594d', category: 'vision' },
@@ -24,16 +24,23 @@ export const MODEL_REGISTRY = [
   { id: 'openrouter-hermes-405b', displayName: 'Hermes 3 405B', provider: 'openrouter', providerLabel: 'OpenRouter', supportsVision: false, supportsReasoning: false, isFree: true, isPro: false, description: 'Exclusive 405B Llama fine-tune', colorAccent: '#7c3aed', category: 'frontier' },
   { id: 'openrouter-step-35-flash', displayName: 'Step 3.5 Flash', provider: 'openrouter', providerLabel: 'OpenRouter', supportsVision: false, supportsReasoning: false, isFree: true, isPro: false, description: 'Exclusive StepFun model', colorAccent: '#7c3aed', category: 'frontier' },
   { id: 'openrouter-qwen3-coder', displayName: 'Qwen3 Coder', provider: 'openrouter', providerLabel: 'OpenRouter', supportsVision: false, supportsReasoning: true, isFree: true, isPro: false, description: 'Dedicated coding specialist', colorAccent: '#7c3aed', category: 'coding' },
-  { id: 'cf-ibm-granite', displayName: 'IBM Granite 4.0', provider: 'cloudflare', providerLabel: 'Cloudflare AI', supportsVision: false, supportsReasoning: false, isFree: true, isPro: false, description: 'Exclusive IBM enterprise model', colorAccent: '#f4a100', category: 'frontier' },
+  { id: 'cf-ibm-granite', displayName: 'IBM Granite 4.0', provider: 'cloudflare', providerLabel: 'Cloudflare AI', supportsVision: false, supportsReasoning: false, isFree: false, isPro: true, description: 'Exclusive IBM enterprise model', colorAccent: '#f4a100', category: 'frontier' },
   { id: 'cf-qwen-qwq-32b', displayName: 'Qwen QwQ 32B', provider: 'cloudflare', providerLabel: 'Cloudflare AI', supportsVision: false, supportsReasoning: true, isFree: true, isPro: false, description: 'Reasoning specialist on CF', colorAccent: '#f4a100', category: 'reasoning' },
   { id: 'cf-glm-47-flash', displayName: 'GLM 4.7 Flash', provider: 'cloudflare', providerLabel: 'Cloudflare AI', supportsVision: false, supportsReasoning: false, isFree: true, isPro: false, description: 'Exclusive Chinese AI model', colorAccent: '#f4a100', category: 'multilingual' },
 
-  // ── Pro Models (locked) ───────────────────────────────────────
+  // ── Pro Models (locked — requires Pro subscription) ─────────────
   { id: 'pro-gpt-4o', displayName: 'GPT-4o', provider: 'openai', providerLabel: 'OpenAI', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'OpenAI multimodal flagship', colorAccent: '#10a37f', category: 'frontier' },
-  { id: 'pro-claude-4-sonnet', displayName: 'Claude 4 Sonnet', provider: 'anthropic', providerLabel: 'Anthropic', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Best for coding & analysis', colorAccent: '#d4a574', category: 'coding' },
+  { id: 'pro-gpt-4o-mini', displayName: 'GPT-4o Mini', provider: 'openai', providerLabel: 'OpenAI', supportsVision: true, supportsReasoning: false, isFree: false, isPro: true, description: 'Fast & affordable OpenAI model', colorAccent: '#10a37f', category: 'fast' },
+  { id: 'pro-o3', displayName: 'o3', provider: 'openai', providerLabel: 'OpenAI', supportsVision: false, supportsReasoning: true, isFree: false, isPro: true, description: "OpenAI's most powerful reasoning model", colorAccent: '#10a37f', category: 'reasoning' },
+  // Claude models
   { id: 'pro-claude-4-opus', displayName: 'Claude 4 Opus', provider: 'anthropic', providerLabel: 'Anthropic', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Anthropic flagship — most capable', colorAccent: '#d4a574', category: 'frontier' },
-  { id: 'pro-gemini-25-pro', displayName: 'Gemini 2.5 Pro', provider: 'google_ai', providerLabel: 'Google AI', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Google\'s most powerful model', colorAccent: '#4285f4', category: 'frontier' },
-  { id: 'pro-llama4-maverick', displayName: 'Llama 4 Maverick', provider: 'meta', providerLabel: 'Meta AI', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Meta\'s largest open model', colorAccent: '#0668E1', category: 'frontier' },
+  { id: 'pro-claude-4-sonnet', displayName: 'Claude 4 Sonnet', provider: 'anthropic', providerLabel: 'Anthropic', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Best for coding & analysis', colorAccent: '#d4a574', category: 'coding' },
+  { id: 'pro-claude-35-sonnet', displayName: 'Claude 3.5 Sonnet', provider: 'anthropic', providerLabel: 'Anthropic', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Exceptional coding and writing', colorAccent: '#d4a574', category: 'coding' },
+  { id: 'pro-claude-35-haiku', displayName: 'Claude 3.5 Haiku', provider: 'anthropic', providerLabel: 'Anthropic', supportsVision: true, supportsReasoning: false, isFree: false, isPro: true, description: 'Fastest Claude — great for quick tasks', colorAccent: '#d4a574', category: 'fast' },
+  { id: 'pro-claude-3-opus', displayName: 'Claude 3 Opus', provider: 'anthropic', providerLabel: 'Anthropic', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Most powerful Claude 3 model', colorAccent: '#d4a574', category: 'frontier' },
+  // Other Pro models
+  { id: 'pro-gemini-25-pro', displayName: 'Gemini 2.5 Pro', provider: 'google_ai', providerLabel: 'Google AI', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: "Google's most powerful model", colorAccent: '#4285f4', category: 'frontier' },
+  { id: 'pro-llama4-maverick', displayName: 'Llama 4 Maverick', provider: 'meta', providerLabel: 'Meta AI', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: "Meta's largest open model", colorAccent: '#0668E1', category: 'frontier' },
   { id: 'pro-mistral-large-3', displayName: 'Mistral Large 3', provider: 'mistral', providerLabel: 'Mistral', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Next-gen Mistral flagship', colorAccent: '#ff7000', category: 'frontier' },
   { id: 'pro-command-r-plus', displayName: 'Command R+', provider: 'cohere', providerLabel: 'Cohere', supportsVision: false, supportsReasoning: true, isFree: false, isPro: true, description: 'Enterprise-grade RAG model', colorAccent: '#39594d', category: 'reasoning' },
   { id: 'pro-phi-4', displayName: 'Phi-4', provider: 'microsoft', providerLabel: 'Microsoft', supportsVision: true, supportsReasoning: true, isFree: false, isPro: true, description: 'Compact powerhouse from Microsoft', colorAccent: '#00bcf2', category: 'reasoning' },
@@ -82,6 +89,8 @@ export const PROVIDERS = [
   { id: 'mistral', label: 'Mistral', color: '#ff7000' },
   { id: 'openrouter', label: 'OpenRouter', color: '#7c3aed' },
   { id: 'cloudflare', label: 'Cloudflare AI', color: '#f4a100' },
+  { id: 'anthropic', label: 'Claude (Anthropic)', color: '#d4a574' },
+  { id: 'openai', label: 'OpenAI', color: '#10a37f' },
 ];
 
 export const CATEGORIES = ['frontier', 'reasoning', 'fast', 'coding', 'vision', 'multilingual'];
@@ -121,7 +130,7 @@ export function getModelIcon(modelId, providerId, size = 16) {
 
 // API key validation rules per provider
 export const API_KEY_VALIDATION = {
-  github_models: { prefix: 'github_pat_', minLength: 20, label: 'GitHub PAT (starts with github_pat_)' },
+  github_models: { prefix: 'github_pat_', altPrefix: 'ghp_', minLength: 20, label: 'GitHub PAT (starts with github_pat_ or ghp_)' },
   google_ai: { prefix: 'AIza', minLength: 30, label: 'Google AI key (starts with AIza)' },
   groq: { prefix: 'gsk_', minLength: 20, label: 'Groq key (starts with gsk_)' },
   cerebras: { prefix: 'csk-', minLength: 20, label: 'Cerebras key (starts with csk-)' },
