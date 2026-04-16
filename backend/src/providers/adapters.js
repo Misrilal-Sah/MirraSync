@@ -65,15 +65,18 @@ async function streamOpenAICompatible(model, messages, apiKey, onToken, onError,
     ...(model.extraHeaders || {}),
   };
 
-  await makeStreamRequest(url, 'POST', headers, body, (line) => {
+  // doneRef lets the onLine closure signal completion through makeStreamRequest's guard
+  const doneRef = { called: false };
+
+  await makeStreamRequest(url, 'POST', headers, body, (line, safeDone) => {
     if (line.startsWith('data: ')) {
       const data = line.slice(6).trim();
-      if (data === '[DONE]') { onDone(); return; }
+      if (data === '[DONE]') { safeDone(); return; }
       try {
         const parsed = JSON.parse(data);
         const delta = parsed.choices?.[0]?.delta?.content;
         if (delta) onToken(delta);
-        if (parsed.choices?.[0]?.finish_reason) onDone();
+        if (parsed.choices?.[0]?.finish_reason) safeDone();
       } catch (e) { /* ignore parse errors in stream */ }
     }
   }, onError, onDone);
@@ -107,14 +110,14 @@ async function streamGoogleAI(model, messages, apiKey, onToken, onError, onDone)
     'Content-Length': Buffer.byteLength(body),
   };
 
-  await makeStreamRequest(url, 'POST', headers, body, (line) => {
+  await makeStreamRequest(url, 'POST', headers, body, (line, safeDone) => {
     if (line.startsWith('data: ')) {
       const data = line.slice(6).trim();
       try {
         const parsed = JSON.parse(data);
         const text = parsed.candidates?.[0]?.content?.parts?.[0]?.text;
         if (text) onToken(text);
-        if (parsed.candidates?.[0]?.finishReason) onDone();
+        if (parsed.candidates?.[0]?.finishReason) safeDone();
       } catch (e) {}
     }
   }, onError, onDone);
@@ -139,7 +142,7 @@ async function streamCohere(model, messages, apiKey, onToken, onError, onDone) {
     'Content-Length': Buffer.byteLength(body),
   };
 
-  await makeStreamRequest(url, 'POST', headers, body, (line) => {
+  await makeStreamRequest(url, 'POST', headers, body, (line, safeDone) => {
     if (line.startsWith('data: ')) {
       const data = line.slice(6).trim();
       try {
@@ -148,7 +151,7 @@ async function streamCohere(model, messages, apiKey, onToken, onError, onDone) {
           const text = parsed.delta?.message?.content?.text;
           if (text) onToken(text);
         }
-        if (parsed.type === 'message-end') onDone();
+        if (parsed.type === 'message-end') safeDone();
       } catch (e) {}
     }
   }, onError, onDone);
@@ -172,10 +175,10 @@ async function streamCloudflare(model, messages, apiKey, accountId, onToken, onE
     'Content-Length': Buffer.byteLength(body),
   };
 
-  await makeStreamRequest(url, 'POST', headers, body, (line) => {
+  await makeStreamRequest(url, 'POST', headers, body, (line, safeDone) => {
     if (line.startsWith('data: ')) {
       const data = line.slice(6).trim();
-      if (data === '[DONE]') { onDone(); return; }
+      if (data === '[DONE]') { safeDone(); return; }
       try {
         const parsed = JSON.parse(data);
         const text = parsed.response || parsed.choices?.[0]?.delta?.content;
@@ -194,9 +197,26 @@ function makeStreamRequest(url, method, headers, body, onLine, onError, onDone) 
     let buffer = '';
     let doneCalled = false;
 
+    // Idempotent done — any path (onLine callback OR stream end) calls this
+    const safeDone = () => {
+      if (doneCalled) return;
+      doneCalled = true;
+      clearTimeout(timeout);
+      onDone();
+      resolve();
+    };
+
+    const safeError = (code, msg) => {
+      if (doneCalled) return;
+      doneCalled = true;
+      clearTimeout(timeout);
+      onError(code, msg);
+      resolve();
+    };
+
     const timeout = setTimeout(() => {
       req.destroy();
-      if (!doneCalled) { doneCalled = true; onError('TIMEOUT', 'Request timed out after 30 seconds'); resolve(); }
+      safeError('TIMEOUT', 'Request timed out after 30 seconds');
     }, 30000);
 
     const req = lib.request({
@@ -207,18 +227,15 @@ function makeStreamRequest(url, method, headers, body, onLine, onError, onDone) 
       headers,
     }, (res) => {
       if (res.statusCode === 401 || res.statusCode === 403) {
-        clearTimeout(timeout);
-        if (!doneCalled) { doneCalled = true; onError('AUTH_ERROR', 'Invalid API key. Please check your key in Settings.'); resolve(); }
+        safeError('AUTH_ERROR', 'Invalid API key. Please check your key in Settings.');
         return;
       }
       if (res.statusCode === 429) {
-        clearTimeout(timeout);
-        if (!doneCalled) { doneCalled = true; onError('RATE_LIMIT', 'Rate limit reached. Please wait before retrying.'); resolve(); }
+        safeError('RATE_LIMIT', 'Rate limit reached. Please wait before retrying.');
         return;
       }
       if (res.statusCode >= 500) {
-        clearTimeout(timeout);
-        if (!doneCalled) { doneCalled = true; onError('PROVIDER_ERROR', `Provider error (${res.statusCode}). Try again later.`); resolve(); }
+        safeError('PROVIDER_ERROR', `Provider error (${res.statusCode}). Try again later.`);
         return;
       }
       // Catch-all for any other non-2xx status (400, 404, 422, etc.)
@@ -227,7 +244,6 @@ function makeStreamRequest(url, method, headers, body, onLine, onError, onDone) 
         res.setEncoding('utf8');
         res.on('data', (chunk) => { errorBody += chunk; });
         res.on('end', () => {
-          clearTimeout(timeout);
           let errorMsg = `Request failed (${res.statusCode})`;
           try {
             const parsed = JSON.parse(errorBody);
@@ -237,7 +253,7 @@ function makeStreamRequest(url, method, headers, body, onLine, onError, onDone) 
             if (errorBody.length < 500) errorMsg += ': ' + errorBody.trim();
           }
           console.error(`Model API error ${res.statusCode}:`, errorMsg);
-          if (!doneCalled) { doneCalled = true; onError('PROVIDER_ERROR', errorMsg); resolve(); }
+          safeError('PROVIDER_ERROR', errorMsg);
         });
         return;
       }
@@ -248,23 +264,20 @@ function makeStreamRequest(url, method, headers, body, onLine, onError, onDone) 
         const lines = buffer.split('\n');
         buffer = lines.pop();
         for (const line of lines) {
-          if (line.trim()) onLine(line);
+          if (line.trim()) onLine(line, safeDone);
         }
       });
       res.on('end', () => {
-        clearTimeout(timeout);
-        if (buffer.trim()) onLine(buffer);
-        if (!doneCalled) { doneCalled = true; onDone(); resolve(); }
+        if (buffer.trim()) onLine(buffer, safeDone);
+        safeDone();
       });
       res.on('error', (err) => {
-        clearTimeout(timeout);
-        if (!doneCalled) { doneCalled = true; onError('NETWORK_ERROR', err.message); resolve(); }
+        safeError('NETWORK_ERROR', err.message);
       });
     });
 
     req.on('error', (err) => {
-      clearTimeout(timeout);
-      if (!doneCalled) { doneCalled = true; onError('NETWORK_ERROR', err.message); resolve(); }
+      safeError('NETWORK_ERROR', err.message);
     });
 
     if (body) req.write(body);

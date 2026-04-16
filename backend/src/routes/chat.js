@@ -84,6 +84,7 @@ router.post('/stream', optionalAuth, async (req, res) => {
   res.flushHeaders();
 
   const sendEvent = (eventType, data) => {
+    if (res.writableEnded) return;
     res.write(`event: ${eventType}\ndata: ${JSON.stringify(data)}\n\n`);
   };
 
@@ -116,10 +117,12 @@ router.post('/stream', optionalAuth, async (req, res) => {
       sendEvent('token', { token, modelId });
     },
     (errorCode, errorMessage) => {
+      if (res.writableEnded) return;
       sendEvent('error', { modelId, code: errorCode, message: errorMessage });
       res.end();
     },
     async () => {
+      if (res.writableEnded) return;
       const responseTimeMs = Date.now() - startTime;
       sendEvent('done', { modelId, responseTimeMs, totalLength: fullResponse.length });
 
@@ -140,7 +143,7 @@ router.post('/stream', optionalAuth, async (req, res) => {
         }
       }
 
-      res.end();
+      if (!res.writableEnded) res.end();
     }
   );
 
